@@ -65,25 +65,25 @@ var tracker = {
     displayOptions: function () {
         var randomProductsIndex = this.getIndexes( allProducts );
 
+        var index1 = randomProductsIndex[0];
+        var index2 = randomProductsIndex[1]; 
+        var index3 = randomProductsIndex[2];
 
-        for (var i = 1; i < 4; i++ ) {
-            var randomProductsArr = []
-            var productsArr = []
-            
-            for  (var j = 0; j < 1; j++ ) {
-            var index = 0
-            
-            index[i] = randomProductsIndex[j];
-            randomProductsArr.push(randomProductsIndex[j])
-            }
+        var product1 = allProducts[index1];
+        var product2 = allProducts[index2];
+        var product3 = allProducts[index3];
 
-        var product = 0
-        product[i] = allProducts[index[i]];
-        this.choice[i].src = product[i].filePath;
-        this.choice[i].id = product[i].id; 
-        this.choice[i].setAttribute( 'data-index', index[i] );
-        
-        }
+        this.choice1.src = product1.filePath;
+        this.choice2.src = product2.filePath;
+        this.choice3.src = product3.filePath;
+
+        this.choice1.id = product1.id; 
+        this.choice2.id = product2.id;
+        this.choice3.id = product3.id;
+
+        this.choice1.setAttribute( 'data-index', index1 );
+        this.choice2.setAttribute( 'data-index', index2 );
+        this.choice3.setAttribute( 'data-index', index3 );
     },
 
     voteCounter: function ( target ) {
@@ -118,7 +118,3 @@ function voteHandler (event) {
 
 instProducts();
 tracker.displayOptions();
-
-
-    // var imageThree = document.getElementById('three');
-    //    imageThree.src = this.filePath;
