@@ -1,4 +1,6 @@
 var allProducts = []
+var naughtyList =[]
+var display = document.getElementById( 'display' );
 
 function Product (displayName, filePath, id) {
     this.displayName = displayName,
@@ -74,7 +76,7 @@ threeRands = [];
             console.log( 'I am threeRands in the else:' + threeRands )
             return threeRands;
         }
-        
+        console.log('this is the naughty list inside the COMPARE' + naughtyList)
     }
     console.log( 'I am threeRands outside the else of the compare function:' + threeRands)
     //call the display function
@@ -89,44 +91,44 @@ console.log( 'I am threeRands outside the function' + threeRands + ' VICTORY IS 
 
 
 function render () {
-    console.log( 'I am threeRands inside render ' + threeRands)
-// getElementbyID
-// set id if need be
-// appendChild
-//select element of the allproductsArr.displayName that have the same indexes as the 3randomIndexes
-//then display
-    // var display = document.getElementById( 'display');
-    // var newProduct1 = document.createElement("img");
-    // newProduct1.setAttribute("src", allProducts[threeRands[0]].filePath );
-    // //newProduct1.setAttribute("id",allProducts[threeRands[0]].id )
-    // display.appendChild( newProduct1 );
-    
+    console.log( 'I am threeRands inside render ' + threeRands)  
+    // Selects element with id 'choice1', adds the url as attribute, select place to append to, finally append
+    var newProduct1 = document.getElementById( 'choice1')
+    newProduct1.setAttribute("src", allProducts[threeRands[0]].filePath );
+    var display = document.getElementById( 'display');
+    display.appendChild(newProduct1);
 
+    var newProduct2 = document.getElementById( 'choice2')
+    newProduct2.setAttribute("src", allProducts[threeRands[1]].filePath );
+    var display = document.getElementById( 'display');
+    display.appendChild(newProduct2);
 
-var newProduct1 = document.getElementById( 'choice1')
-newProduct1.setAttribute("src", allProducts[threeRands[0]].filePath );
-var display = document.getElementById( 'display');
-display.appendChild(newProduct1);
+    var newProduct3 = document.getElementById( 'choice3')
+    newProduct3.setAttribute("src", allProducts[threeRands[2]].filePath );
+    var display = document.getElementById( 'display');
+    display.appendChild(newProduct3);
 
-var newProduct2 = document.getElementById( 'choice2')
-newProduct2.setAttribute("src", allProducts[threeRands[1]].filePath );
-var display = document.getElementById( 'display');
-display.appendChild(newProduct2);
+    //take VALUES of threeRands and save to a naughty list
+    //maybe this should happen after it is click, in any event it won't be called until there is a click function that calls the randindex again
+    naughtyList = threeRands;
+    console.log('this is the naughty list inside the render function:' + naughtyList)
 
-var newProduct3 = document.getElementById( 'choice3')
-newProduct3.setAttribute("src", allProducts[threeRands[2]].filePath );
-var display = document.getElementById( 'display');
-display.appendChild(newProduct3);
-
-
-// var newProduct2 = document.getElementById( 'choice2').setAttribute("src", allProducts[threeRands[1]].filePath );
-// display.appendChild(newProduct2);
-
-
-
-
-// console.log('consoleLOG says: ' + allProducts[threeRands[1]].filePath);
-
-
+    return naughtyList
+    // display.addEventListener( 'click', vote);
 }
+
+// function vote (event) {
+//         var clicked = event.target;
+//         console.log(clicked)
+//}
+var display = document.getElementById( 'display' );
+display.addEventListener( 'click', vote, true );
+
 render();
+console.log('this is the naughty list OUTSIDE the render function:' + naughtyList)
+
+function vote () {
+    var clicked = event.target;
+    console.log(clicked)
+    
+}
