@@ -1,6 +1,6 @@
 var allProducts = []
 var naughtyList =[]
-var display = document.getElementById( 'display' );
+// var display = document.getElementById( 'display' );
 var totalClicks = 0;
 
 
@@ -45,7 +45,7 @@ function instProducts() {
 //somewhere at the end of their usefulness change them to 'oddDisplay'
 //compare evenDisplay and oddDisplay to make sure they have no overlapping indexes/instances whatever
 
-
+var threeRands = [];
 function get3RandomIndexes() {
     //console.log(allProducts)
     threeRands = [];
@@ -83,14 +83,14 @@ function get3RandomIndexes() {
         // console.log( 'I am threeRands outside the else of the compare function:' + threeRands)
         //call the display function
         //then rename threeRands to lastRands
-        
+        render();
         return threeRands;
     
 }
 
 instProducts();
 get3RandomIndexes();
-render();
+
 // console.log( 'I am threeRands outside the function' + threeRands + ' VICTORY IS MINE, BOW TO MY GLORY!!!' )
 
 
@@ -99,32 +99,19 @@ function render () {
     console.log( 'I am threeRands inside render ' + threeRands)  
     // Selects element with id 'choice1', adds the url as attribute, select place to append to, finally append
 
-    var display = document.getElementById( 'display');
-    var newProduct1 = document.createElement("img");
-    //console.log(allProducts[threeRands[0]].filePath)
-    newProduct1.setAttribute("class", "classP" )
+    var findClass = document.getElementsByClassName( 'classP');
+
+    var newProduct1 = findClass[0];
     newProduct1.setAttribute("src", allProducts[threeRands[0]].filePath );
     newProduct1.setAttribute("id", allProducts[threeRands[0]].id )
-    display.appendChild(newProduct1);
-   
-    //var display = document.getElementById( 'display');
-    //var newProduct2 = document.createElement("img");
-    //var newProduct2 = document.getElementsByClassName( 'class2')
-    var newProduct2 = document.createElement("img");
-    newProduct2.setAttribute("class", "classP" )
+  
+    var newProduct2 = findClass[1];
     newProduct2.setAttribute("src", allProducts[threeRands[1]].filePath );
     newProduct2.setAttribute("id", allProducts[threeRands[1]].id )
-    display.appendChild(newProduct2);
 
-    //var display = document.getElementById( 'display');
-   // var newProduct3 = document.getElementsByClassName( 'class3')
-    var newProduct3 = document.createElement("img");
-    newProduct3.setAttribute("class", "classP" )
+    var newProduct3 = findClass[2];
     newProduct3.setAttribute("src", allProducts[threeRands[2]].filePath );
     newProduct3.setAttribute("id", allProducts[threeRands[2]].id )
-    display.appendChild(newProduct3);
-
-    // display.addEventListener( 'click', vote);
 }
 
 var display = document.getElementById( 'display' );
@@ -143,16 +130,17 @@ function vote () {
             allProducts[i].votes =  allProducts[i].votes +1 
         }
     }
+
     totalClicks += 1
     
     if (totalClicks < 5 ) {
         console.log('NEEEEEXXXTTTTT, heading to get more indexes hopefully')
-        rePop();
+        get3RandomIndexes();
         // render();
     }
     else {
         console.log('results here/link to chart')
-
+        console.table(allProducts)
     }
 
     console.log('total clicks equal : ' + totalClicks)
@@ -160,11 +148,5 @@ function vote () {
 
 }
 
-function rePop () {
-    for(i = 0; i < 3; i++ ){
-        var oldProducts = document.getElementsByClassName("classP")[0];
-        display.removeChild(oldProducts);
-      }
-    render();
-}
+
 
