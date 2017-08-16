@@ -1,6 +1,8 @@
 var allProducts = []
 var naughtyList =[]
 var display = document.getElementById( 'display' );
+var totalClicks = 0;
+
 
 function Product (displayName, filePath, id) {
     this.displayName = displayName,
@@ -14,12 +16,12 @@ function Product (displayName, filePath, id) {
 
 //Constructor and instances
 function instProducts() {
-    var bag = new Product( 'bag', 'images/bag.jpg');
-    var banana = new Product( 'banana', 'images/banana.jpg');
-    var bathroom = new Product('bathroom', 'images/bathroom.jpg');
-    var boots = new Product('boots', 'images/boots.jpg');
-    var bubbleGum = new Product('bubbleGum', 'images/bubblegum.jpg');
-    var chair = new Product('chair', 'images/chair.jpg', 'chair');
+    var bag = new Product( 'bag', 'images/bag.jpg', 'bag');
+    var banana = new Product( 'banana', 'images/banana.jpg', 'banana');
+    var bathroom = new Product('bathroom', 'images/bathroom.jpg', 'bathroom');
+    var boots = new Product('boots', 'images/boots.jpg', 'boots');
+    var bubbleGum = new Product('bubbleGum', 'images/bubblegum.jpg', 'bubblegum');
+    var chair = new Product('chair', 'images/chair.jpg', 'chair', 'chair');
     var cthulhu = new Product('cthulhu', 'images/cthulhu.jpg', 'cthulhu');
     var dogDuck = new Product('dogDuck', 'images/dog-duck.jpg', 'dogDuck');
     var dragon = new Product('dragon', 'images/dragon.jpg', 'dragon');
@@ -45,90 +47,124 @@ function instProducts() {
 
 
 function get3RandomIndexes() {
-//console.log(allProducts)
-threeRands = [];
+    //console.log(allProducts)
+    threeRands = [];
 
-    for ( var i = 0; i < 3; i++) {
-        var randNum =  Math.floor( Math.random() * allProducts.length );
-        threeRands.push( randNum );
-    }
+        for ( var i = 0; i < 3; i++) {
+            var randNum =  Math.floor( Math.random() * allProducts.length );
+            threeRands.push( randNum );
+        }
+        
+        console.log('threeRands after for loop: ' + threeRands)
+        compare(threeRands);
+
+        //make sure 3 rands doesn't have any double numbers
+
+        function compare (arr) {
+            console.log('start of compare function: ' + threeRands)
+            if ( threeRands[0] === threeRands[1] ) {
+                // console.log( 'I am threeRands in the if:' + threeRands )
+                get3RandomIndexes();
+            }
+            else if (threeRands[0] === threeRands[2] ) {
+                // console.log( 'I am threeRands in the else if:' + threeRands )
+                get3RandomIndexes();
+            }
+            else if (threeRands[1] === threeRands[2] ) {
+                // console.log( 'I am threeRands in the second else if:' + threeRands )
+                get3RandomIndexes();
+            }
+            else {
+                console.log( 'I am threeRands in the else:' + threeRands )
+                return threeRands;
+            }
+            // console.log('this is the naughty list inside the COMPARE' + naughtyList)
+        }
+        // console.log( 'I am threeRands outside the else of the compare function:' + threeRands)
+        //call the display function
+        //then rename threeRands to lastRands
+        
+        return threeRands;
     
-    console.log('threeRands after for loop: ' + threeRands)
-    compare(threeRands);
-
-//make sure 3 rands doesn't have any double numbers
-
-    function compare (arr) {
-        console.log('start of compare function: ' + threeRands)
-        if ( threeRands[0] === threeRands[1] ) {
-            console.log( 'I am threeRands in the if:' + threeRands )
-            get3RandomIndexes();
-        }
-        else if (threeRands[0] === threeRands[2] ) {
-            console.log( 'I am threeRands in the else if:' + threeRands )
-            get3RandomIndexes();
-        }
-        else if (threeRands[1] === threeRands[2] ) {
-            console.log( 'I am threeRands in the second else if:' + threeRands )
-            get3RandomIndexes();
-        }
-        else {
-            console.log( 'I am threeRands in the else:' + threeRands )
-            return threeRands;
-        }
-        console.log('this is the naughty list inside the COMPARE' + naughtyList)
-    }
-    console.log( 'I am threeRands outside the else of the compare function:' + threeRands)
-    //call the display function
-    //then rename threeRands to lastRands
-    return threeRands;
 }
 
 instProducts();
 get3RandomIndexes();
-console.log( 'I am threeRands outside the function' + threeRands + ' VICTORY IS MINE, BOW TO MY GLORY!!!' )
-
+render();
+// console.log( 'I am threeRands outside the function' + threeRands + ' VICTORY IS MINE, BOW TO MY GLORY!!!' )
 
 
 function render () {
+    
     console.log( 'I am threeRands inside render ' + threeRands)  
     // Selects element with id 'choice1', adds the url as attribute, select place to append to, finally append
-    var newProduct1 = document.getElementById( 'choice1')
-    newProduct1.setAttribute("src", allProducts[threeRands[0]].filePath );
-    var display = document.getElementById( 'display');
-    display.appendChild(newProduct1);
 
-    var newProduct2 = document.getElementById( 'choice2')
-    newProduct2.setAttribute("src", allProducts[threeRands[1]].filePath );
     var display = document.getElementById( 'display');
+    var newProduct1 = document.createElement("img");
+    //console.log(allProducts[threeRands[0]].filePath)
+    newProduct1.setAttribute("class", "classP" )
+    newProduct1.setAttribute("src", allProducts[threeRands[0]].filePath );
+    newProduct1.setAttribute("id", allProducts[threeRands[0]].id )
+    display.appendChild(newProduct1);
+   
+    //var display = document.getElementById( 'display');
+    //var newProduct2 = document.createElement("img");
+    //var newProduct2 = document.getElementsByClassName( 'class2')
+    var newProduct2 = document.createElement("img");
+    newProduct2.setAttribute("class", "classP" )
+    newProduct2.setAttribute("src", allProducts[threeRands[1]].filePath );
+    newProduct2.setAttribute("id", allProducts[threeRands[1]].id )
     display.appendChild(newProduct2);
 
-    var newProduct3 = document.getElementById( 'choice3')
+    //var display = document.getElementById( 'display');
+   // var newProduct3 = document.getElementsByClassName( 'class3')
+    var newProduct3 = document.createElement("img");
+    newProduct3.setAttribute("class", "classP" )
     newProduct3.setAttribute("src", allProducts[threeRands[2]].filePath );
-    var display = document.getElementById( 'display');
+    newProduct3.setAttribute("id", allProducts[threeRands[2]].id )
     display.appendChild(newProduct3);
 
-    //take VALUES of threeRands and save to a naughty list
-    //maybe this should happen after it is click, in any event it won't be called until there is a click function that calls the randindex again
-    naughtyList = threeRands;
-    console.log('this is the naughty list inside the render function:' + naughtyList)
-
-    return naughtyList
     // display.addEventListener( 'click', vote);
 }
 
-// function vote (event) {
-//         var clicked = event.target;
-//         console.log(clicked)
-//}
 var display = document.getElementById( 'display' );
 display.addEventListener( 'click', vote, true );
 
-render();
-console.log('this is the naughty list OUTSIDE the render function:' + naughtyList)
 
 function vote () {
     var clicked = event.target;
-    console.log(clicked)
+    //console.log('this is the value of clicked: ' + clicked.id)
+   // console.log('this is the value of allProducts[i].id :' + allProducts[1].id )
+
+    for ( var i = 0; i < allProducts.length; i++ ) {
+        console.log('this for loop is running')
+        if (clicked.id === allProducts[i].id ) {
+            console.log('found you!!!!')
+            allProducts[i].votes =  allProducts[i].votes +1 
+        }
+    }
+    totalClicks += 1
     
+    if (totalClicks < 5 ) {
+        console.log('NEEEEEXXXTTTTT, heading to get more indexes hopefully')
+        rePop();
+        // render();
+    }
+    else {
+        console.log('results here/link to chart')
+
+    }
+
+    console.log('total clicks equal : ' + totalClicks)
+    //console.table(allProducts)
+
 }
+
+function rePop () {
+    for(i = 0; i < 3; i++ ){
+        var oldProducts = document.getElementsByClassName("classP")[0];
+        display.removeChild(oldProducts);
+      }
+    render();
+}
+
