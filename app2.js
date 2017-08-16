@@ -1,6 +1,21 @@
-var allProducts = []
-var naughtyList =[]
-// var display = document.getElementById( 'display' );
+//first thing ask is there anything on LS? if so, get it from LS (and tell it to parse it and then put it in a usable form (new object))
+//if not..keep going
+var storedProducts = getFromLS( 'products' );
+var allProducts = [];
+
+if ( storedProducts ) {
+    for ( var i = 0; i < storedProducts.length; i++ ) {
+        var productData = storedProducts[i];
+        var product = new Product( productData.displayName, productData.filePath, productData.id );
+        product.votes = productData.votes; //adding a prop
+    }
+    
+}
+else {
+    instProducts();
+}
+
+
 var totalClicks = 0;
 
 
@@ -88,10 +103,8 @@ function get3RandomIndexes() {
     
 }
 
-instProducts();
 get3RandomIndexes();
 
-// console.log( 'I am threeRands outside the function' + threeRands + ' VICTORY IS MINE, BOW TO MY GLORY!!!' )
 
 
 function render () {
@@ -126,7 +139,6 @@ function vote () {
     for ( var i = 0; i < allProducts.length; i++ ) {
         console.log('this for loop is running')
         if (clicked.id === allProducts[i].id ) {
-            console.log('found you!!!!')
             allProducts[i].votes =  allProducts[i].votes +1 
         }
     }
@@ -134,19 +146,51 @@ function vote () {
     totalClicks += 1
     
     if (totalClicks < 5 ) {
-        console.log('NEEEEEXXXTTTTT, heading to get more indexes hopefully')
+        console.log('Next, heading to get more indexes hopefully')
         get3RandomIndexes();
-        // render();
+        
     }
     else {
         console.log('results here/link to chart')
         console.table(allProducts)
+        viewResults();
     }
 
     console.log('total clicks equal : ' + totalClicks)
     //console.table(allProducts)
 
+    saveToLS('products', allProducts);
+}
+
+function saveToLS ( key, value ) {
+    var str = JSON.stringify( value );
+    localStorage.setItem( key, str);
+}
+
+function getFromLS ( key ) {
+    return JSON.parse( localStorage.getItem( key ) );
 }
 
 
+function viewResults() {
+
+            var display = document.getElementById( 'display' );
+            this.display.removeEventListener ( 'click', vote );
+            console.table( allProducts );
+    
+            var canvas =  document.getElementById( 'mallChart' ).getContext( '2d' );
+            var voteChart = new Chart ( canvas, {
+                type: 'bar',
+                data: {
+                    labels: allProducts.map(function ( product ) {
+                        return product.displayName;
+                    }),
+                    datasets: [{
+                        label: 'Number of votes', 
+                        data: allProducts.map(function ( product) {
+                            return product.votes;
+                        }) 
+                    }]
+                }
+})}
 
