@@ -2,6 +2,7 @@
 //if not..keep going
 var storedProducts = getFromLS( 'products' );
 var allProducts = [];
+var totalClicks = 0;
 
 if ( storedProducts ) {
     for ( var i = 0; i < storedProducts.length; i++ ) {
@@ -16,7 +17,7 @@ else {
 }
 
 
-var totalClicks = 0;
+
 
 
 function Product (displayName, filePath, id) {
@@ -145,7 +146,7 @@ function vote () {
 
     totalClicks += 1
     
-    if (totalClicks < 5 ) {
+    if (totalClicks < 25 ) {
         console.log('Next, heading to get more indexes hopefully')
         get3RandomIndexes();
         
