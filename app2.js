@@ -18,8 +18,6 @@ else {
 
 
 
-
-
 function Product (displayName, filePath, id) {
     this.displayName = displayName,
     this.filePath = filePath,
@@ -99,7 +97,7 @@ function get3RandomIndexes() {
         // console.log( 'I am threeRands outside the else of the compare function:' + threeRands)
         //call the display function
         //then rename threeRands to lastRands
-        render();
+        renderProduct();
         return threeRands;
     
 }
@@ -108,9 +106,9 @@ get3RandomIndexes();
 
 
 
-function render () {
+function renderProduct () {
     
-    console.log( 'I am threeRands inside render ' + threeRands)  
+    console.log( 'I am threeRands inside renderProduct ' + threeRands)  
     // Selects element with id 'choice1', adds the url as attribute, select place to append to, finally append
 
     var findClass = document.getElementsByClassName( 'classP');
@@ -146,7 +144,7 @@ function vote () {
 
     totalClicks += 1
     
-    if (totalClicks < 25 ) {
+    if (totalClicks < 5 ) {
         console.log('Next, heading to get more indexes hopefully')
         get3RandomIndexes();
         
@@ -156,9 +154,6 @@ function vote () {
         console.table(allProducts)
         viewResults();
     }
-
-    console.log('total clicks equal : ' + totalClicks)
-    //console.table(allProducts)
 
     saveToLS('products', allProducts);
 }
@@ -175,23 +170,26 @@ function getFromLS ( key ) {
 
 function viewResults() {
 
-            var display = document.getElementById( 'display' );
-            this.display.removeEventListener ( 'click', vote );
-            console.table( allProducts );
-    
-            var canvas =  document.getElementById( 'mallChart' ).getContext( '2d' );
-            var voteChart = new Chart ( canvas, {
-                type: 'bar',
-                data: {
-                    labels: allProducts.map(function ( product ) {
-                        return product.displayName;
-                    }),
-                    datasets: [{
-                        label: 'Number of votes', 
-                        data: allProducts.map(function ( product) {
-                            return product.votes;
-                        }) 
-                    }]
-                }
+    var display = document.getElementById( 'display' );
+    this.display.removeEventListener ( 'click', vote );
+    console.table( allProducts );
+
+    var canvas =  document.getElementById( 'mallChart' ).getContext( '2d' );
+    var voteChart = new Chart ( canvas, {
+        type: 'bar',
+        data: {
+            labels: allProducts.map(function ( product ) {
+                return product.displayName;
+            }),
+            datasets: [{
+                label: 'Number of votes', 
+                data: allProducts.map(function ( product) {
+                    return product.votes;
+                }),
+                backgroundColor: [ '#0CB8AC', '#B4A5E8', '#FDD540', '#E39191', '#5658A3', '#0CB8AC', '#B4A5E8', '#FDD540', '#E39191', '#5658A3', '#0CB8AC', '#B4A5E8', '#FDD540', '#E39191', '#5658A3','#0CB8AC', '#FDD540', '#E39191', '#5658A3', '#0CB8AC'] 
+            }]
+        }
 })}
+
+
 
