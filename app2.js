@@ -1,5 +1,3 @@
-//first thing ask is there anything on LS? if so, get it from LS (and tell it to parse it and then put it in a usable form (new object))
-//if not..keep going
 var storedProducts = getFromLS('products');
 var allProducts = [];
 var totalClicks = 0;
@@ -9,7 +7,7 @@ if (storedProducts) {
     for (var i = 0; i < storedProducts.length; i++) {
         var productData = storedProducts[i];
         var product = new Product(productData.displayName, productData.filePath, productData.id);
-        product.votes = productData.votes; //adding a prop
+        product.votes = productData.votes; 
     }
 
 } else {
@@ -28,7 +26,7 @@ function Product(displayName, filePath, id) {
     //console.log(allProducts);
 }
 
-//Constructor and instances
+
 function instProducts() {
     var bag = new Product('bag', 'images/bag.jpg', 'bag');
     var banana = new Product('banana', 'images/banana.jpg', 'banana');
@@ -52,13 +50,6 @@ function instProducts() {
 }
 
 
-//TODO
-//creat array with all objects// they are accessible as instances of their mother Object at allProducts [1], etc
-//use random number gen to give 3 random numbers between 0 and allProducts.length
-//save those numbers to an array called 'evenDisplay'
-//somewhere at the end of their usefulness change them to 'oddDisplay'
-//compare evenDisplay and oddDisplay to make sure they have no overlapping indexes/instances whatever
-
 var threeRands = [];
 
 function get3RandomIndexes() {
@@ -76,13 +67,10 @@ function get3RandomIndexes() {
     function compare(arr) {
        
         if (threeRands[0] === threeRands[1]) {
-            // console.log( 'I am threeRands in the if:' + threeRands )
             get3RandomIndexes();
         } else if (threeRands[0] === threeRands[2]) {
-            // console.log( 'I am threeRands in the else if:' + threeRands )
             get3RandomIndexes();
         } else if (threeRands[1] === threeRands[2]) {
-            // console.log( 'I am threeRands in the second else if:' + threeRands )
             get3RandomIndexes();
         } else {
 
