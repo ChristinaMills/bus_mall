@@ -131,6 +131,7 @@ function vote() {
 
     totalClicks += 1
 
+
     if (totalClicks < 25) {
         console.log('Next, heading to get more indexes hopefully')
         get3RandomIndexes();

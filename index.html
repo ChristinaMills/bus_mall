@@ -2,23 +2,30 @@
 <html>
     <head>
         <link href="style.css" type="text/css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Josefin+Slab|Squada+One" rel="stylesheet">
     </head>
     <body>
+        <header>
+            <nav>
+                <img id="globe" src="images/globe.png">
+                <h1 id="firm"> WORLD DOMINATION MARKETING </h1>
+            </nav>
+        </header>
         <main>
             <section>
-                <h1> Select your Favorite </h1>
+                <h1 id="question"> What would YOU like to buy on a BUS? </h1>
                     <div id="display">
                         <img class="classP">
                         <img class="classP">
                         <img class="classP">
                     </div>
             </section>
-           <canvas id="mallChart" height="300" width="300">
-            
-            </canvas>
+            <section id="chartDisplay">
+                <canvas id="mallChart" height="300" width="300">
+                
+                </canvas>
         </main>
         <script src="app2.js"></script>
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
-        
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script> 
     </body>
 </html>
